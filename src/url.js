@@ -25,7 +25,7 @@ function getQueryStringRegExp(name,url) {
  * @return {Object} 将链接里的参数以键值对的形式返回
  */
 
-function getUrlParams(url){
+function urlParamsToObject(url){
     url = url ? url : window.location.href;
     var paramsString = url.replace(/(.+)\?/,""),
         paramsArray = paramsString.split('&'),
@@ -38,7 +38,28 @@ function getUrlParams(url){
     return result;
 }
 
+
+/**
+ *
+ * @desc   对象序列化成url的形式
+ * @param  {String} url  链接的url地址 www.hahaha.com?name=abc&value=aaa
+ * @return {Object} 将链接里的参数以键值对的形式返回
+ */
+
+function objectToUrlParams(data){
+    let result = "";
+    for(let key in data) {
+        let value = data[key];
+        if(Object.prototype.toString.call(value) === '[object Object]' || Object.prototype.toString.call(value) === '[object Array]'){
+            value = JSON.stringify(value);
+        }
+        result+=`${key}=${value}&`;
+    }
+    return result.replace(/.$/,"");
+}
+
 module.exports = {
     getQueryStringRegExp,
-    getUrlParams
+    urlParamsToObject,
+    objectToUrlParams
 };
