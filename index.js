@@ -1,7 +1,7 @@
-import Url from './src/url';
-import throttle from './src/throttle';
-import Validate from './src/validate';
-
+// import Url from './src/url';
+// import throttle from './src/throttle';
+// import Validate from './src/validate';
+import keyCode from './src/keyCode';
 
 // let result = Url.getQueryStringRegExp("name","www.baidu.com?key=fsdf&name=fsfd");
 // let result = Url.getUrlParams("www.baidu.com?key=fsdf&name=fsfd");
@@ -17,4 +17,7 @@ import Validate from './src/validate';
 // },300,1000);
 
 // console.log(Validate.isMoneyAmount("323232.4"));
-console.log(Validate.isIP("10.0.0.2"));
+document.addEventListener('keydown',function (e) {
+    console.log(e.keyCode);
+   console.log(keyCode.getKeyName(e.keyCode));
+});

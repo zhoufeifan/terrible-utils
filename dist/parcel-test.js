@@ -65,198 +65,141 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({4:[function(require,module,exports) {
+})({7:[function(require,module,exports) {
 "use strict";
 
-/**
- *
- * @desc 根据参数名获取url中对应的参数值
- * @param  {String} name url 中的参数名
- * @param  {String} url  链接的url地址 www.hahaha.com?name=abc&value=aaa
- * @return {String} g返回链接里的参数值
- */
+var keyCodeMap = {
+  8: 'Backspace',
+  9: 'Tab',
+  13: 'Enter',
+  16: 'Shift',
+  17: 'Ctrl',
+  18: 'Alt',
+  19: 'Pause',
+  20: 'Caps Lock',
+  27: 'Escape',
+  32: 'Space',
+  33: 'Page Up',
+  34: 'Page Down',
+  35: 'End',
+  36: 'Home',
+  37: 'Left',
+  38: 'Up',
+  39: 'Right',
+  40: 'Down',
+  42: 'Print Screen',
+  45: 'Insert',
+  46: 'Delete',
 
-function getQueryStringRegExp(name, url) {
-  url = decodeURIComponent(url);
-  //检测name是否是这个链接的参数，并且只出现一次
-  if (url.match(new RegExp("^(.*[?|&]" + name + "=){1}", "i"))) {
-    var result = "";
-    url.replace(new RegExp("[?!&]" + name + "=(.*)&?"), function (match, p1) {
-      result = p1;
-    });
-    return result;
-  }
-  return "";
-}
-/**
- *
- * @desc   获取url中的所有参数以对象的形式返回
- * @param  {String} url  链接的url地址 www.hahaha.com?name=abc&value=aaa
- * @return {Object} 将链接里的参数以键值对的形式返回
- */
+  48: '0',
+  49: '1',
+  50: '2',
+  51: '3',
+  52: '4',
+  53: '5',
+  54: '6',
+  55: '7',
+  56: '8',
+  57: '9',
 
-function urlParamsToObject(url) {
-  url = url ? url : window.location.href;
-  var paramsString = url.replace(/(.+)\?/, ""),
-      paramsArray = paramsString.split('&'),
-      result = {};
-  paramsArray.map(function (item) {
-    var name = item.replace(/(.+)=.+/, "$1");
-    var value = window.decodeURIComponent(item.replace(/.+=(.+)/, "$1"));
-    result[name] = value;
-  });
-  return result;
-}
+  65: 'A',
+  66: 'B',
+  67: 'C',
+  68: 'D',
+  69: 'E',
+  70: 'F',
+  71: 'G',
+  72: 'H',
+  73: 'I',
+  74: 'J',
+  75: 'K',
+  76: 'L',
+  77: 'M',
+  78: 'N',
+  79: 'O',
+  80: 'P',
+  81: 'Q',
+  82: 'R',
+  83: 'S',
+  84: 'T',
+  85: 'U',
+  86: 'V',
+  87: 'W',
+  88: 'X',
+  89: 'Y',
+  90: 'Z',
 
-/**
- *
- * @desc   对象序列化成url的形式
- * @param  {String} url  链接的url地址 www.hahaha.com?name=abc&value=aaa
- * @return {Object} 将链接里的参数以键值对的形式返回
- */
+  91: 'Windows',
+  93: 'Right Click',
 
-function objectToUrlParams(data) {
-  var result = "";
-  for (var key in data) {
-    var value = data[key];
-    if (Object.prototype.toString.call(value) === '[object Object]' || Object.prototype.toString.call(value) === '[object Array]') {
-      value = JSON.stringify(value);
-    }
-    result += key + "=" + value + "&";
-  }
-  return result.replace(/.$/, "");
-}
+  96: 'Numpad 0',
+  97: 'Numpad 1',
+  98: 'Numpad 2',
+  99: 'Numpad 3',
+  100: 'Numpad 4',
+  101: 'Numpad 5',
+  102: 'Numpad 6',
+  103: 'Numpad 7',
+  104: 'Numpad 8',
+  105: 'Numpad 9',
+  106: 'Numpad *',
+  107: 'Numpad +',
+  109: 'Numpad -',
+  110: 'Numpad .',
+  111: 'Numpad /',
 
-module.exports = {
-  getQueryStringRegExp: getQueryStringRegExp,
-  urlParamsToObject: urlParamsToObject,
-  objectToUrlParams: objectToUrlParams
+  112: 'F1',
+  113: 'F2',
+  114: 'F3',
+  115: 'F4',
+  116: 'F5',
+  117: 'F6',
+  118: 'F7',
+  119: 'F8',
+  120: 'F9',
+  121: 'F10',
+  122: 'F11',
+  123: 'F12',
+
+  144: 'Num Lock',
+  145: 'Scroll Lock',
+  182: 'My Computer',
+  183: 'My Calculator',
+  186: ';',
+  187: '=',
+  188: ',',
+  189: '-',
+  190: '.',
+  191: '/',
+  192: '`',
+  219: '[',
+  220: '\\',
+  221: ']',
+  222: '\''
 };
-},{}],6:[function(require,module,exports) {
-"use strict";
-
 /**
- *
- * @desc  函数节流
- * @param  {Function} fn 执行的目标函数
- * @param  {Number} delay 节流的的时间间隔
- * @param  {Number} maxDelay 触发行数执行的最大时间
- * @return {Function} 返回节流过的函数
+ * @desc 根据keycode获得键名
+ * @param  {Number} keycode
+ * @return {String}
  */
-function throttle(fn, delay, maxDelay) {
-  var timer = null;
-  var startTime = void 0;
-  return function () {
-    var context = this,
-        args = arguments,
-        currentTime = +new Date();
-    //先清理上一次的调用触发（上一次调用触发事件不执行）
-    clearTimeout(timer);
-    //如果不存触发时间，那么当前的时间就是触发时间
-    if (!startTime) {
-      startTime = currentTime;
-    }
-    //如果当前时间-触发时间大于最大的间隔时间（maxDelay），触发一次函数运行函数
-    if (currentTime - startTime >= maxDelay) {
-      fn.apply(context, args);
-      startTime = currentTime;
-    }
-    //否则延迟执行
-    else {
-        timer = setTimeout(function () {
-          fn.apply(context, args);
-        }, delay);
-      }
-  };
-}
-module.exports = throttle;
-},{}],7:[function(require,module,exports) {
-"use strict";
-
-/**
- *
- * @desc   判断是否为邮箱地址
- * @param  {String}  str
- * @return {Boolean}
- */
-function isEmail(str) {
-  return (/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(str)
-  );
-}
-/**
- *
- * @desc  判断是否为身份证号
- * @param  {String|Number} str
- * @return {Boolean}
- */
-function isIdCard(str) {
-  return (/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(str)
-  );
-}
-
-/**
- *
- * @desc   判断是否为手机号
- * @param  {String|Number} str
- * @return {Boolean}
- */
-function isPhoneNum(str) {
-  return (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(str)
-  );
-}
-
-/**
- *
- * @desc   判断是否为URL地址
- * @param  {String} str
- * @return {Boolean}
- */
-function isUrl(str) {
-  return (/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i.test(str)
-  );
-}
-
-/**
- *
- * @desc   判断是否为IP地址
- * @param  {String} str
- * @return {Boolean}
- */
-function isIP(str) {
-  return (/(?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d)/i.test(str)
-  );
-}
-
-/**
- *
- * @desc   判断是否为金额的格式
- * @param  {String} str
- * @return {Boolean}
- */
-function isMoneyAmount(str) {
-  return (/^(([1-9]{1,9})|0)(\.\d{0,2})?$/.test(str)
-  );
-}
+function getKeyName(keycode) {
+  if (keyCodeMap[keycode]) {
+    return keyCodeMap[keycode];
+  } else {
+    console.log('Unknow Key(Key Code:' + keycode + ')');
+    return '';
+  }
+};
 
 module.exports = {
-  isUrl: isUrl,
-  isIP: isIP,
-  isMoneyAmount: isMoneyAmount
+  getKeyName: getKeyName
 };
 },{}],2:[function(require,module,exports) {
 "use strict";
 
-var _url = require("./src/url");
+var _keyCode = require("./src/keyCode");
 
-var _url2 = _interopRequireDefault(_url);
-
-var _throttle = require("./src/throttle");
-
-var _throttle2 = _interopRequireDefault(_throttle);
-
-var _validate = require("./src/validate");
-
-var _validate2 = _interopRequireDefault(_validate);
+var _keyCode2 = _interopRequireDefault(_keyCode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -274,8 +217,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // },300,1000);
 
 // console.log(Validate.isMoneyAmount("323232.4"));
-console.log(_validate2.default.isIP("10.0.0.2"));
-},{"./src/url":4,"./src/throttle":6,"./src/validate":7}],0:[function(require,module,exports) {
+document.addEventListener('keydown', function (e) {
+  console.log(e.keyCode);
+  console.log(_keyCode2.default.getKeyName(e.keyCode));
+}); // import Url from './src/url';
+// import throttle from './src/throttle';
+// import Validate from './src/validate';
+},{"./src/keyCode":7}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -293,7 +241,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent) {
-  var ws = new WebSocket('ws://localhost:54616/');
+  var ws = new WebSocket('ws://localhost:49895/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
