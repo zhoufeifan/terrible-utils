@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "just test parcel",
   "repository": "git@github.com:zhoufeifan/zhoufeifan.github.com.git",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "build": "parcel index.js",
+    "test": "parcel index.html"
   },
   "keywords": [],
   "author": "zhoufeifan",
