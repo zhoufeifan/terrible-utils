@@ -8,7 +8,7 @@
     "build": "parcel index.js",
     "test": "parcel index.html"
   },
-  "keywords": [],
+  "keywords": ["utlis"],
   "author": "zhoufeifan",
   "license": "ISC",
   "devDependencies": {
