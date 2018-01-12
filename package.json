@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "some terrible utils",
   "repository": "git@github.com:zhoufeifan/zhoufeifan.github.com.git",
-  "main": "dist/index.js",
+  "main": "./index.js",
   "scripts": {
     "build": "parcel index.js",
     "test": "parcel index.html"
