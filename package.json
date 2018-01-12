@@ -1,7 +1,7 @@
 {
   "name": "terrible-utils",
-  "version": "1.0.0",
-  "description": "just test parcel",
+  "version": "1.0.1",
+  "description": "some terrible utils",
   "repository": "git@github.com:zhoufeifan/zhoufeifan.github.com.git",
   "main": "dist/index.js",
   "scripts": {

@@ -1,12 +1,12 @@
-import url from './src/url';
-import throttle from './src/throttle';
-import validate from './src/validate';
-import keyCode from './src/keyCode';
-import dateTime from './src/amount';
-import device from './src/device';
-import object from './src/object';
-import utils from './src/utils';
-import amount from './src/amount';
+const url = require('./src/url');
+const throttle = require('./src/throttle');
+const validate = require('./src/validate');
+const keyCode = require('./src/keyCode');
+const dateTime = require('./src/amount');
+const device = require('./src/device');
+const object = require('./src/object');
+const utils = require('./src/utils');
+const amount = require('./src/amount');
 
 module.exports = {
     url,
