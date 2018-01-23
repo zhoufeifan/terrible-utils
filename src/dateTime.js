@@ -1,15 +1,15 @@
 /**
- * 
+ *
  * @desc 时间格式化
  * @param  {Date} dateTime 时间值
  * @param  {String} fmtStr 格式 例如）
  * 整体思路：根据正则表达是替换fmtStr中的匹配字符 例如以年份替换连续的'Y'
- * @return {String} 以字符串的形式返回日期 
+ * @return {String} 以字符串的形式返回日期
  */
 
-function dateTimeFormat(dateTime,fmtStr){
-    if(!dateTime)dateTime = new Date();
-    let result = fmtStr || "YYYY-MM-DD";
+function dateTimeFormat(dateTime, fmtStr = "YYYY-MM-DD") {
+    if (!dateTime) dateTime = new Date();
+    let result = fmtStr;
     let dateValueMap = {
         Y: dateTime.getFullYear(),
         M: dateTime.getMonth() + 1,
@@ -18,20 +18,19 @@ function dateTimeFormat(dateTime,fmtStr){
         m: dateTime.getMinutes(),
         s: dateTime.getSeconds()
     };
-    let markArray = ['Y','M','D','h','m','s'];
-    markArray.map(function(item){
-        if(~fmtStr.indexOf(item)){
-            let rep = new RegExp("("+item+"+"+")"); 
+    let markArray = ['Y', 'M', 'D', 'h', 'm', 's'];
+    markArray.map(function (item) {
+        if (~fmtStr.indexOf(item)) {
+            let rep = new RegExp("(" + item + "+" + ")");
             // rep = /(Y+)/
-            result = result.replace(rep,function(match){
-                if(!match) 
+            result = result.replace(rep, function (match) {
+                if (!match)
                     return "";
-                    // 如果有2个占位符的话就要补0，如：2012-09-09
-                return match.length === 2 ? dateValueMap[item].toString().padStart(2,"0") : dateValueMap[item];
+                // 如果有2个占位符的话就要补0，如：2012-09-09
+                return match.length === 2 ? dateValueMap[item].toString().padStart(2, "0") : dateValueMap[item];
             });
         }
     });
-    console.log(result);
     return result;
 }
 
@@ -43,10 +42,9 @@ function dateTimeFormat(dateTime,fmtStr){
  * @param  {Date} dateTime 初始的时间值
  * @return {Date} 以字符串的形式返回日期
  */
-function getOffsetDateTime(offset,type,dateTime){
-    if(!dateTime) dateTime = new Date();
-    console.log(dateTime);
-    switch(type){
+function getOffsetDateTime(offset, type, dateTime) {
+    if (!dateTime) dateTime = new Date();
+    switch (type) {
         case 'year':
             dateTime.setFullYear(dateTime.getFullYear() + offset);
             break;
@@ -80,19 +78,19 @@ function formatPassTime(targetTime) {
     // 根据相差的秒数来换算出当前相差的时间
     let currentTime = Date.parse(new Date());
     let time = currentTime - targetTime;
-    let isBefore = time>0;
-    time = time >0 ? time : time*-1;
+    let isBefore = time > 0;
+    time = time > 0 ? time : time * -1;
     let day = parseInt(time / (1000 * 60 * 60 * 24)),
         hour = parseInt(time / (1000 * 60 * 60)),
         min = parseInt(time / (1000 * 60)),
         month = parseInt(day / 30),
         year = parseInt(month / 12);
-    if (year) return `${year}年${isBefore?"前":"后"}`;
-    if (month) return `${month}个月${isBefore?"前":"后"}`;
-    if (day) return `${day}天${isBefore?"前":"后"}`;
-    if (hour) return `${hour}小时${isBefore?"前":"后"}`;
-    if (min) return `${min}分钟${isBefore?"前":"后"}`;
-    else return `${isBefore?'刚刚':'马上'}`;
+    if (year) return `${year}年${isBefore ? "前" : "后"}`;
+    if (month) return `${month}个月${isBefore ? "前" : "后"}`;
+    if (day) return `${day}天${isBefore ? "前" : "后"}`;
+    if (hour) return `${hour}小时${isBefore ? "前" : "后"}`;
+    if (min) return `${min}分钟${isBefore ? "前" : "后"}`;
+    else return `${isBefore ? '刚刚' : '马上'}`;
 }
 
 

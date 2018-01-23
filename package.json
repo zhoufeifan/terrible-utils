@@ -1,6 +1,6 @@
 {
   "name": "terrible-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "some terrible utils",
   "repository": "git@github.com:zhoufeifan/zhoufeifan.github.com.git",
   "main": "./index.js",
@@ -8,7 +8,9 @@
     "build": "parcel index.js",
     "test": "parcel index.html"
   },
-  "keywords": ["utlis"],
+  "keywords": [
+    "utlis"
+  ],
   "author": "zhoufeifan",
   "license": "ISC",
   "devDependencies": {
@@ -22,5 +24,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "qs": "^6.5.1"
   }
 }
