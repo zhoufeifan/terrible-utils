@@ -1,30 +1,30 @@
-const Request = require('./src/request');
+require("babel-core/register");
+require("babel-polyfill");
 
-
-const request = new Request({
-    baseURL: "http://openapi.daily.heyean.com",
-    onLoadingStart: () => {
-        console.log('startLoading');
-    },
-    onLoadingEnd: () => {
-        console.log('endLoading');
-    },
-    onError: (error)=>{
-        if(error && error.errorMsg){
-            console.log(error.errorMsg);
-        }else {
-            console.log(error || "未知错误");
-        }
+class Person {
+    constructor(name,age){
+        this.name = name;
+        this.age = age;
     }
-});
-
-request({
-    url:"/gateway.htm?command=version_check_update",
-    data:{
-        version:"3.9.2"
+    static cool(){
+        console.log('so cool');
     }
-}).then((data)=>{
+}
 
-},(error)=>{
-    console.log(error)
-});
+class Student extends Person {
+    constructor(name,age,grade){
+        super(name,age);
+        this.grade = grade;
+    }
+    static cool(){
+        console.log("student cool");
+    }
+}
+Person.cool();
+Student.cool();
+var p1 = new Person("niam",12);
+var s1 = new Student("niba",13,"class 1");
+console.log(p1);
+console.log(Person.prototype);
+console.log(s1);
+console.log(Student.prototype);

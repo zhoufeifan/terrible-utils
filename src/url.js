@@ -18,6 +18,7 @@ function getQueryStringRegExp(name,url) {
     }
     return "";
 }
+
 /**
  *
  * @desc   获取url中的所有参数以对象的形式返回
@@ -41,12 +42,13 @@ function urlParamsToObject(url){
 
 /**
  *
- * @desc   对象序列化成url的形式
- * @param  {String} url  链接的url地址 www.hahaha.com?name=abc&value=aaa
- * @return {Object} 将链接里的参数以键值对的形式返回
+ * @desc   对象系列化成url参数的形式
+ * @param  {String} domain  域名地址 www.hahaha.com
+ * @param  {Object} data  对象数据{key:value}
+ * @return {String} 返回一个完整的url地址，即域名加参数
  */
 
-function objectToUrlParams(data){
+function objectToUrlParams(url,data){
     let result = "";
     for(let key in data) {
         let value = data[key];
@@ -55,7 +57,7 @@ function objectToUrlParams(data){
         }
         result+=`${key}=${value}&`;
     }
-    return result.replace(/.$/,"");
+    return url + "?" + result.replace(/.$/,"");
 }
 
 module.exports = {

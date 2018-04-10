@@ -36,13 +36,13 @@ function dateTimeFormat(dateTime, fmtStr = "YYYY-MM-DD") {
 
 /**
  *
- * @desc 根据当前日期和偏移量获取新的日期
+ * @desc 根据初始日期和偏移量获取新的日期
  * @param  {Number} offset 偏移量
  * @param  {String} type 偏移的类型 year, month, day, hours, minutes, seconds
  * @param  {Date} dateTime 初始的时间值
  * @return {Date} 以字符串的形式返回日期
  */
-function getOffsetDateTime(offset, type, dateTime) {
+function getOffsetDateTime(offset = 0, type="day", dateTime) {
     if (!dateTime) dateTime = new Date();
     switch (type) {
         case 'year':
