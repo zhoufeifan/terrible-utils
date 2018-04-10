@@ -6,46 +6,7 @@
   const {parseCentToYuan} = amount;
   console.log(parseCentToYuan(200)); //2
 ```
-## 目录
-- [1. amount](amount)
-  - [1.1 parseCentToYuan](parseCentToYuan)
-  - [1.2 parseYuanToCent](parseYuanToCent)
-  - [1.3 formatYuan](formatYuan)
 
-- [2. dateTime](dateTime)
-  - [2.1 dateTimeFormat](dateTimeFormat)
-  - [2.2 getOffsetDateTime](getOffsetDateTime)
-  - [2.3 formatPassTime](formatPassTime)
-
-- [3. device](device)
-  - [3.1 getExplore](getExplore)
-  - [3.2 getOS](getOS)
-  - [3.3 isWeichat](isWeichat)
-  - [3.4 isAlipay](isAlipay)
-
-- [4. keyCode](keyCode)
-  - [4.1 getKeyName](getKeyName)
-
-- [5. object](object)
-  - [5.1 isEmptyObject](isEmptyObject)
-  - [5.2 deepClone](deepClone)
-
-- [6. url](url)
-	- [6.1 getQueryStringRegExp](getQueryStringRegExp)
-	- [6.2 urlParamsToObject](urlParamsToObject)
-	- [6.3 objectToUrlParams](objectToUrlParams)
-	
-- [7. validate](validate)
-	- [7.1 isEmail](isEmail)
-	- [7.2 isIdCard](isIdCard)
-	- [7.3 isPhoneNum](isPhoneNum)
-	- [7.4 isUrl](isUrl)
-	- [7.5 isIP](isIP)
-	- [7.6 isMoneyAmount](isMoneyAmount)
-	
-- [其他](other)
-   - [throttle](throttle)
-   
 ## <a name="amount">1. amount</a>
 ### <a name="parseCentToYuan">1.1 parseCentToYuan</a> 
 ```
