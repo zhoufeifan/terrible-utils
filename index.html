@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <title>Utils Test</title>
+    <style>
+        .parent{
+           width: 1000px;
+           height: 600px; 
+        }
+        .children{
+            width: 500px;
+            height: 400px;
+            margin-left: 100px;
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root">
+    <div class="parent">
+        <div class="children"></div>
+    </div>
+</div>
 <script src="./test.js"></script>
 </body>
 </html>

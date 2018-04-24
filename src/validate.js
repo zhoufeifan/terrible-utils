@@ -56,7 +56,7 @@ function isIP(str) {
  * @return {Boolean}
  */
 function isMoneyAmount(str) {
-    return /^(([1-9]{1,9})|0)(\.\d{0,2})?$/.test(str);
+    return /^(([1-9]\d{0,7})|0)(\.\d{0,2})?$/.test(str);
 }
 
 module.exports = {

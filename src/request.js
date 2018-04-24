@@ -57,7 +57,6 @@ class Request {
         async function request(option) {
             let {url, data, config = {}} = option;
             config = Object.assign(baseConfig, {method: 'post'}, config, {url, data});
-            config = {...config};
             if (data instanceof FormData) {
                 config.contentType = false; // 上传文件时必要参数
                 config.processData = false; // 上传文件时必要参数
@@ -79,7 +78,7 @@ class Request {
                 response = await http(config);
             } catch (error) {
                 showLoading && onLoadingEnd && onLoadingEnd();
-                handleError(error)
+                handleError({errorMsg:error.message})
             }
 
             showLoading && onLoadingEnd && onLoadingEnd();
