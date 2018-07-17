@@ -93,29 +93,19 @@ function compress(file, options) {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
     
-                const maxW = options.width;
-                const maxH = options.height;
-                // let w = img.width;
-                // let h = img.height;
-                // let dataURL;
-    
-                // if (w < h && h > maxH) {
-                //     w = parseInt(maxH * img.width / img.height);
-                //     h = maxH;
-                // } else if (w >= h && w > maxW) {
-                //     h = parseInt(maxW * img.height / img.width);
-                //     w = maxW;
-                // }
-    
+                let w = img.width * 0.9;
+                let h = img.height * 0.9;
+                console.log("执行等比压缩");
+                let dataURL;
+
                 canvas.width = w;
                 canvas.height = h;
     
                 ctx.drawImage(img, 0, 0, w, h);
-    
                 if (/image\/jpeg/.test(file.type) || /image\/jpg/.test(file.type)) {
-                    dataURL = canvas.toDataURL('image/jpeg', options.quality);
+                    dataURL = canvas.toDataURL('image/jpeg', 1);
                 } else {
-                    dataURL = canvas.toDataURL(file.type);
+                    dataURL = canvas.toDataURL(file.type, 1);
                 }
                 if (options.type == 'file') {
                     if (/;base64,null/.test(dataURL) || /;base64,$/.test(dataURL)) {
@@ -125,18 +115,15 @@ function compress(file, options) {
                     } else {
                         let blob = dataURItoBlob(dataURL);
                         if (blob) {
-                            // 如果设置了maxSize, 递归压缩到够小为止
-                            if (options.maxSize && blob.size > options.maxSize) {
-                                options.width -= 500;
-                                options.height -= 500;
-                                options.quality -= 0.3;
-                                let compressedBlob = await compress(blob, options);
-                                resolve(compressedBlob);
-                            }
                             blob.id = file.id;
                             blob.name = file.name;
                             blob.lastModified = file.lastModified;
                             blob.lastModifiedDate = file.lastModifiedDate;
+                            // 如果设置了maxSize, 递归压缩到够小为止
+                            if (options.maxSize && blob.size > options.maxSize) {
+                                let compressedBlob = await compress(blob, options);
+                                resolve(compressedBlob);
+                            }
                             resolve(blob);
                         } else {
                             reject("压缩出错");
