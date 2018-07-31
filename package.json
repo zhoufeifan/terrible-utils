@@ -1,6 +1,6 @@
 {
   "name": "terrible-utils",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "some terrible utils",
   "repository": "git@github.com:zhoufeifan/zhoufeifan.github.com.git",
   "main": "./index.js",
