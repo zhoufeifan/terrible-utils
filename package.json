@@ -9,7 +9,7 @@
     "test": "parcel index.html"
   },
   "keywords": [
-    "utlis"
+    "utils"
   ],
   "author": "zhoufeifan",
   "license": "ISC",
