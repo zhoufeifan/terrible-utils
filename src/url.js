@@ -28,12 +28,12 @@ function getQueryStringRegExp(name,url) {
 
 function urlParamsToObject(url){
     url = url ? url : window.location.href;
-    var paramsString = url.replace(/(.+)\?/,""),
+    let paramsString = url.replace(/(.+)\?/,""),
         paramsArray = paramsString.split('&'),
         result = {};
     paramsArray.map(function(item){
-        var name = item.replace(/(.+)=.+/,"$1");
-        var value = window.decodeURIComponent(item.replace(/.+=(.+)/,"$1"));
+        let name = item.replace(/(.+)=.*/,"$1");
+        let value = window.decodeURIComponent(item.replace(/.+=(.*)/,"$1"));
         result[name] = value;
     });
     return result;
