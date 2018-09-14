@@ -46,15 +46,8 @@ function formatYuan(amount){
     return amount.replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1,');
 }
 
-// module.exports = {
-//     parseCentToYuan,
-//     parseYuanToCent,
-//     formatYuan
-// };
-export function nima (){
-    console.log('1');
-};
-
-export function niba (){
-    console.log('1');
+module.exports = {
+    parseCentToYuan,
+    parseYuanToCent,
+    formatYuan
 };
