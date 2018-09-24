@@ -1,0 +1,27 @@
+/*一些公共的样式*/
+* {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+input{
+  -webkit-appearance: none;
+  outline: none;
+}
+button{
+  border: none;
+  background-color: transparent;
+}
+html, body, #app {
+  height: 100%;
+}
+
+a{
+  text-decoration: none;
+}
+p {
+  line-height: 1;
+}
