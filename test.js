@@ -1,15 +1,24 @@
 require("babel-core/register");
 require("babel-polyfill");
 
-import {throttleFirstInvoke,throttleLastInvoke} from './src/other.js';
+import {deepClone} from './src/object.js';
 
-var myFun = throttleFirstInvoke(()=>{
-    console.log('aa');
-},1000);
+var aa = {
+    a1:{
+        b1:{
+            "name": 1,
+            "id": 2
+        },
+        b2:[{
+            b:1
+        },{
+            b:2
+        }]
+    },
+    a2: "1"
+};
 
-var myFun1 = throttleLastInvoke(()=>{
-    console.log('bb');
-},1000);
-
-// window.onresize = myFun;
-window.onresize = myFun1;
+console.log(aa);
+var bb = deepClone(aa);
+aa.a1.b2 = null;
+console.log(bb);

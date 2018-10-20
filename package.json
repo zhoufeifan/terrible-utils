@@ -28,6 +28,8 @@
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
+    "key": "^0.1.11",
+    "object": "^0.1.1",
     "qs": "^6.5.1",
     "transform-runtime": "0.0.0"
   }
