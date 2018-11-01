@@ -1,11 +1,11 @@
 /**
  *
- * @desc  先行函数节流
+ * @desc  节流
  * @param  {Function} fn 执行的目标函数
  * @param  {Number} delay 节流的时间间隔
  * @return {Function} 返回节流过的函数
  */
-function throttleFirstInvoke(fn, delay) {
+function throttle(fn, delay) {
     let startTime;
     return function () {
         let context = this, args = arguments, currentTime = +new Date();
@@ -24,13 +24,13 @@ function throttleFirstInvoke(fn, delay) {
 
 /**
  *
- * @desc  后置函数节流
+ * @desc  防抖
  * @param  {Function} fn 执行的目标函数
  * @param  {Number} delay 节流的时间间隔
  * @param  {Number} maxDelay 触发函数执行的最大延迟时间，默认为0即立即执行
  * @return {Function} 返回节流过的函数
  */
-function throttleLastInvoke(fn, delay, maxDelay) {
+function debounce(fn, delay, maxDelay) {
     let startTime;
     let timer = null;
     maxDelay = maxDelay || delay
@@ -58,6 +58,6 @@ function throttleLastInvoke(fn, delay, maxDelay) {
 
 
 module.exports = {
-    throttleFirstInvoke,
-    throttleLastInvoke
+    throttle,
+    debounce
 };
